@@ -1,17 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addContacts, deleteContacts, fetchContacts } from './operations';
-
-const contactInitialState = {
-  contacts: {
-    items: [],
-    isLoading: false,
-    error: null,
-  },
-};
+import {
+  addContacts,
+  deleteContacts,
+  fetchContacts,
+} from '../contactsThunk.js';
 
 const contactSlice = createSlice({
   name: 'contacts',
-  initialState: contactInitialState,
+  initialState: {
+    contacts: {
+      items: [],
+      isLoading: false,
+      error: null,
+    },
+  },
   extraReducers: {
     [fetchContacts.pending](state) {
       state.contacts.isLoading = true;
@@ -31,7 +33,7 @@ const contactSlice = createSlice({
     [addContacts.fulfilled](state, action) {
       state.contacts.isLoading = false;
       state.contacts.error = null;
-      state.contacts.items.push(action.payload);
+      state.contacts.items.unshift(action.payload);
     },
     [addContacts.rejected](state, action) {
       state.contacts.isLoading = false;
@@ -44,7 +46,7 @@ const contactSlice = createSlice({
       state.contacts.isLoading = false;
       state.contacts.error = null;
       const index = state.contacts.items.findIndex(
-        contact => contact.id === action.payload
+        contact => contact.id === action.payload.id
       );
       state.contacts.items.splice(index, 1);
     },

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Input, Label } from './Filter.styled';
-import { filterContacts } from 'redux/filterSlice';
+import { filterContacts } from 'redux/slices/filterSlice';
 
 const SearchContactFilter = () => {
   const dispatch = useDispatch();

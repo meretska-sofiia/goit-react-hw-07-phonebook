@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addContacts } from 'redux/operations';
+import { addContacts } from 'redux/contactsThunk.js';
 import { selectContacts } from 'redux/selectors';
-import { Form, Input, Button } from './AddContactForm.styled';
+import { Form, Input, Button } from './ContactForm.styled';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
